@@ -1,0 +1,156 @@
+/* Note:Your choice is C IDE */
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
+	int sn,i,sum;
+	char user[50];
+	char password[50],pw[50];
+	int confirm;
+	char status[50];
+	
+	int type;
+	char typez[50];
+	int ticket;
+	int money;
+	
+void menu()//主界面函数
+{
+	printf("\n\t\t北京欢乐谷网上购票系统\n");
+	printf("\t\t1:新用户注册\n");
+	printf("\t\t2:购票结算\n");
+	printf("\t\t3:商品结算\n");
+	printf("\t\t0:退出系统\n");
+}
+void login()//注册函数
+{
+		printf("请输入用户名：");
+		scanf("%s",user);
+		printf("请填写密码：");
+		scanf("%s",password);
+		printf("请再次填写密码：");
+		scanf("%s",pw);
+		printf("是否接受协议1/0：");
+		scanf("%d",&confirm);
+		switch(confirm)
+		{
+			case 1:
+				if(strcmp(password,pw))
+					printf("密码与确认密码不一致，请重新注册\n");
+				else
+				{
+					printf("注册成功\n");
+					printf("注册账户名：%s    注册密码：%s\n",user,password);
+				}
+				break;
+			case 0:
+				printf("不接受协议，注册不成功\n");
+				break;
+			default:printf("输入错误，请输入1/0\n");
+		}	
+}	
+void form()//编号2的填表函数
+{
+	printf("请输入购买票数：");
+	scanf("%d",&ticket);
+	printf("顾客%s您好，你选择了：\n",user);
+	printf("游戏项目类型：%s\n",typez);	
+	printf("购票张数：%d\n",ticket);
+	do
+	{
+		printf("信息确认请按0/1：");
+		scanf("%d",&confirm);
+		switch(confirm)
+		{
+			case 1:
+				printf("核实信息后请支付票款%d元\n",ticket*type);
+				printf("顾客支付金额：");
+				scanf("%d",&money);
+				printf("欢迎光临欢乐谷，找零%d元\n",money-type*ticket);
+				break;
+			case 0:printf("请重新购买\n");break;
+			default:printf("输入错误，请输入1/0\n");
+		}
+	}while(confirm!=1&&confirm!=0);
+}
+
+void purchase()//结算函数
+{
+	printf("请输入你的身份：成人/学生：");
+	scanf("%s",status);
+	if(strcmp(status,"成人")==0)
+	{
+		printf("\n\n\t\t===游戏项目===\n");
+		printf("\t\t1:摩天轮(150元/位)\n");	
+		printf("\t\t2:过山车(100元/位)\n");	
+		printf("\t\t3:海盗船(80元/位)\n");
+		printf("请输入你的姓名：");
+		scanf("%s",user);
+		printf("请输入游戏项目类型：");
+		scanf("%d",&type);
+		switch(type)
+		{
+			case 1:strcpy(typez,"摩天轮"),type=150;break;
+			case 2:strcpy(typez,"过山车"),type=100;break;
+			case 3:strcpy(typez,"海盗船"),type=80;break;
+		}	
+	form();//调用函数
+	}
+	else if(strcmp(status,"学生")==0)
+	{
+		printf("\n\n\t\t===游戏项目===\n");
+		printf("\t\t1:聚能飞船(100元/位)\n");	
+		printf("\t\t2:能量风暴(70元/位)\n");	
+		printf("\t\t3:水晶神翼(50元/位)\n");
+		printf("请输入你的姓名：");
+		scanf("%s",user);
+		printf("请输入游戏项目类型：");
+		scanf("%d",&type);
+		switch(type)
+		{
+			case 1:strcpy(typez,"聚能飞船"),type=100;break;
+			case 2:strcpy(typez,"能量风暴"),type=70;break;
+			case 3:strcpy(typez,"水晶神翼"),type=50;break;
+		}	
+		form();
+	}	
+	else
+	printf("您输入有误，请输入成人/学生\n");	
+}	
+void goods()//商品结算函数
+{
+	printf("景区超市购物\n");
+	for(i=0,sum=0;i<6;i++)
+	{
+		printf("请输入第%d种小商品的价格：",i+1);
+		scanf("%d",&money);
+		sum+=money;		
+	}
+	printf("共计消费%d元\n",sum);
+	printf("请输入支付金额：");
+	scanf("%d",&money);
+	if(money>=sum)
+	printf("找零%d元\n",money-sum);
+	else
+	{
+		printf("金额不够，需再支付%d元\n",sum-money);
+	}
+}
+//主调函数
+void main()//北京欢乐谷
+{            
+    while(1)
+    {    	
+    	menu();//输出主界面
+    	
+	    printf("请输入功能编号：");
+	    scanf("%d",&sn);
+	    switch(sn)
+	    {
+	    	case 1:login();break;
+	    	case 2:purchase();break;
+	    	case 3:goods();break;
+	    	case 0:printf("欢迎下次再来游玩\n");exit(0);
+	    	default:printf("您输入的功能编号有误\n");
+	    }
+    }
+}
