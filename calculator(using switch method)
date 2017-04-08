@@ -1,0 +1,30 @@
+/* Note:Your choice is C IDE */
+#include "stdio.h"
+void main()
+{
+	//定义变量
+    float a,b;
+    int j;
+    char c;
+    //输入表达式
+    while(1)
+    {
+	    printf("酷威计算器:请输入表达式\n");
+	    scanf("%f%c%f",&a,&c,&b);
+	    //输出结果
+	    switch(c)
+	    {
+	    	case '+':printf("%f%c%f=%f",a,c,b,a+b);break;
+	    	case '-':printf("%f%c%f=%f",a,c,b,a-b);break;
+	    	case '/':printf("%f%c%f=%f",a,c,b,a/b);break;
+	    	case '*':printf("%f%c%f=%f",a,c,b,a*b);break;
+	    	default:printf("输入有误\n");break;
+	    }
+	    printf("是否退出y/n: ");
+		scanf("%d",&j);
+		if(0==j)
+		{
+		    break;	
+		}
+    }
+}
